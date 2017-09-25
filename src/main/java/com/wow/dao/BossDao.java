@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wow.domain.Region;
+import com.wow.entity.BlizzardError;
 import com.wow.entity.Boss;
 import com.wow.exception.BossNotFoundException;
 import com.wow.util.WowConnection;
@@ -28,27 +29,23 @@ public class BossDao {
 		Util.checkNotNull(region);
 		StringBuilder param = new StringBuilder();
 		param.append(boss);
-		param.append(String.format(locale, region.toString()));
+		param.append(boss).append(String.format(locale, region.toString()));
 		String jsonString = WowConnection.getJsonString(param.toString());
 		JSONObject jsonObj = new JSONObject(jsonString);
 		JSONArray jsonArray = jsonObj.getJSONArray("bosses");
 		Type reflectType = new TypeToken<List<Boss>>(){}.getType();
-		List<Boss> bosses = new Gson().fromJson(String.valueOf(jsonArray), reflectType);
-		return bosses;
+		return new Gson().fromJson(String.valueOf(jsonArray), reflectType);
 	}
 
 	public Boss getBoss(String id,Region region) throws BossNotFoundException {
 		Util.checkNotNull(id);
 		StringBuilder param = new StringBuilder();
-		param.append(boss);
-		param.append(id);
-		param.append(String.format(locale, region.toString()));
+		param.append(boss).append(id).append(String.format(locale, region.toString()));
 		String jsonString = WowConnection.getJsonString(param.toString());
-		JSONObject jsonObject = new JSONObject(jsonString);
-		if(!jsonObject.isNull("status") && "nok".equals(jsonObject.get("status")))
+		BlizzardError error = new Gson().fromJson(jsonString, BlizzardError.class);
+		if(error.getStatus()!=null)
 			throw new BossNotFoundException();
-		Boss boss = new Gson().fromJson(jsonString, Boss.class);
-		return boss;
+		return new Gson().fromJson(jsonString, Boss.class);
 	}
 	
 	public Boss getBoss(String id) {

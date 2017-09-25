@@ -19,6 +19,7 @@ public class Character {
 	    "faction": 0,
 	    "totalHonorableKills": 1130
 	}*/
+	
 	private long lastModified;
 	private String name;
 	private String realm;

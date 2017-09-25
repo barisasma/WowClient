@@ -26,7 +26,7 @@ public class BasicTest {
 		dao.getBosses(null).stream().forEach(System.out::println);
 	}
 	
-	//@Test
+	@Test
 	public void getBoss() throws Exception {
 		BossDao dao = new BossDao();
 		dao.getBoss("53879");//success

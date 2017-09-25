@@ -7,6 +7,10 @@ import java.net.URL;
 import org.apache.commons.io.FileUtils;
 
 public class Util {
+	
+	private Util() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	static ClassLoader loader = Util.class.getClassLoader();
 	public static <T> T checkNotNull(T reference) {
@@ -15,7 +19,6 @@ public class Util {
 		}
 		return reference;
 	}
-
 
 	public static String getKey() {
 		URL resource = loader.getResource("key.txt");

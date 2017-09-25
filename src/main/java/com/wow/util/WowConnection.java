@@ -9,9 +9,13 @@ import java.net.URL;
 public class WowConnection {
 
 
+	private WowConnection() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static String getJsonString(String param) {
 		String apiKey = "apikey=%s";
-		
+
 		String adress = "https://eu.api.battle.net/wow/";
 		String url = String.format("%s%s&%s", adress,param,String.format(apiKey, Util.getKey()));
 		HttpURLConnection urlConnection;
