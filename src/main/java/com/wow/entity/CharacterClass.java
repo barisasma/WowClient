@@ -1,11 +1,22 @@
 package com.wow.entity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class CharacterClass {
 
 	private int id;
 	private int mask;
 	private String powerType;
 	private String name;
+	
+	public CharacterClass(int id,int mask, String powerType, String name) {
+		this.id=id;
+		this.mask=mask;
+		this.powerType=powerType;
+		this.name = name;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -31,4 +42,9 @@ public class CharacterClass {
 		this.name = name;
 	}
 	
+	@Override
+	public String toString() {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		return gson.toJson(this);
+	}
 }

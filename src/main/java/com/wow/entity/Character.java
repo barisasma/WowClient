@@ -1,9 +1,11 @@
 package com.wow.entity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
 public class Character {
-	
+
 	/*{
 	    "lastModified": 1506289253000,
 	    "name": "Polon",
@@ -19,13 +21,14 @@ public class Character {
 	    "faction": 0,
 	    "totalHonorableKills": 1130
 	}*/
-	
+
 	private long lastModified;
 	private String name;
 	private String realm;
 	private String battlegroup;
+	private CharacterClass characterClass;
 	@SerializedName("class")
-	private int classID;
+	private int classId;
 	private int race;
 	private String level;
 	private String achievementPoints;
@@ -57,11 +60,17 @@ public class Character {
 	public void setBattlegroup(String battlegroup) {
 		this.battlegroup = battlegroup;
 	}
-	public int getClassID() {
-		return classID;
+	public CharacterClass getCharacterClass() {
+		return characterClass;
 	}
-	public void setClassID(int classID) {
-		this.classID = classID;
+	public void setCharacterClass(CharacterClass characterClass) {
+		this.characterClass = characterClass;
+	}
+	public int getClassId() {
+		return classId;
+	}
+	public void setClassId(int classId) {
+		this.classId = classId;
 	}
 	public int getRace() {
 		return race;
@@ -105,5 +114,11 @@ public class Character {
 	public void setTotalHonorableKills(long totalHonorableKills) {
 		this.totalHonorableKills = totalHonorableKills;
 	}
-	
+
+	@Override
+	public String toString() {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		return gson.toJson(this);
+	}
+
 }
