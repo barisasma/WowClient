@@ -12,5 +12,9 @@ public class Dao {
 		BlizzardError error = new Gson().fromJson(jsonString, BlizzardError.class);
 		return error.getStatus()!=null;
 	}
+	
+	public Region checkRegion(Region region) {
+		return region == null ? this.region : region;
+	}
 
 }

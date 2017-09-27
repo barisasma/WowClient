@@ -36,6 +36,7 @@ public class Character {
 	private String calcClass; 
 	private int faction;
 	private long totalHonorableKills;
+	private int[] achievementsCompleted;
 	public long getLastModified() {
 		return lastModified;
 	}
@@ -115,6 +116,13 @@ public class Character {
 		this.totalHonorableKills = totalHonorableKills;
 	}
 
+	public int[] getAchievementsCompleted() {
+		return achievementsCompleted;
+	}
+	public void setAchievementsCompleted(int[] achievementsCompleted) {
+		this.achievementsCompleted = achievementsCompleted;
+	}
+	
 	@Override
 	public String toString() {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

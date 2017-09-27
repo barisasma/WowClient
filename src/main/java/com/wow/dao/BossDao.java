@@ -14,6 +14,7 @@ import com.wow.domain.Region;
 import com.wow.entity.Boss;
 import com.wow.exception.BossNotFoundException;
 import com.wow.util.WowConnection;
+import com.wow.util.ParamBuilder;
 import com.wow.util.Util;
 
 public class BossDao extends Dao{
@@ -23,11 +24,11 @@ public class BossDao extends Dao{
 		this.region = Region.EN_US;
 	}
 	
-	private String boss="boss/";
+	private String boss="boss";
 
 	public List<Boss> getBosses(@Nonnull Region region) {
-		StringBuilder param = new StringBuilder();
-		param.append(boss).append(String.format(Util.LOCALE,region==null?this.region:region.toString()));
+		ParamBuilder param = new ParamBuilder();
+		param.addParam(boss).addFields(checkRegion(region));
 		String jsonString = WowConnection.getJsonString(param.toString());
 		JSONObject jsonObj = new JSONObject(jsonString);
 		JSONArray jsonArray = jsonObj.getJSONArray("bosses");
@@ -37,8 +38,8 @@ public class BossDao extends Dao{
 
 	public Boss getBoss(@Nonnull String id,Region region) {
 		Util.checkNotNull(id);
-		StringBuilder param = new StringBuilder();
-		param.append(boss).append(id).append(String.format(Util.LOCALE, region==null?this.region:region.toString()));
+		ParamBuilder param = new ParamBuilder();
+		param.addParam(boss, id).addFields(checkRegion(region));
 		String jsonString = WowConnection.getJsonString(param.toString());
 		if(checkWowException(jsonString))
 			throw new BossNotFoundException("Boss Not Found");

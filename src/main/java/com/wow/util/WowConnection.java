@@ -14,6 +14,7 @@ public class WowConnection {
 
 	public static String getJsonString(String param) {
 		String url = String.format("%s%s&%s", Util.ADDRESS,param,String.format(Util.APIKEY, Util.getKey()));
+		System.out.println(url);
 		HttpURLConnection urlConnection = null;
 		String ret = "";
 		try {
