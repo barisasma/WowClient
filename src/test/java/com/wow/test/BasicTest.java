@@ -9,6 +9,7 @@ import org.junit.Test;
 import com.wow.dao.BossDao;
 import com.wow.dao.CharacterDao;
 import com.wow.dao.DataSourcesDao;
+import com.wow.domain.Field;
 import com.wow.domain.Region;
 import com.wow.util.Util;
 
@@ -33,12 +34,12 @@ public class BasicTest {
 		System.out.println(dao.getBoss("53879"));//write
 	}
 	
-	//@Test
+	@Test
 	public void getCharacter() throws Exception{
 		CharacterDao dao = new CharacterDao();
 		System.out.println(dao.getCharacter("Outland", "Polon", Region.EN_GB));
 		System.out.println(dao.getCharacter("Outland", "Tarona", Region.EN_GB));
-		System.out.println(dao.getCharacterAchi("Outland", "Polon", Region.EN_GB));
+		System.out.println(dao.getCharacter("Outland", "Polon", Region.EN_GB));
 	}
 
 	//@Test
@@ -46,10 +47,23 @@ public class BasicTest {
 		System.out.println(Util.getKey());
 	}
 	
-	@Test
+	//@Test
 	public void getCharacterAchievements() throws Exception{
 		DataSourcesDao dao = new DataSourcesDao();
 		dao.getCharacterAchievements(Region.EN_GB).stream().forEach(System.out::println);
+	}
+	
+	//@Test
+	public void getCharacterFeed() throws Exception {
+		CharacterDao dao = new CharacterDao();
+		System.out.println(dao.getCharacter("Outland", "Polon", Region.EN_GB,Field.FEED,Field.ACHIEVEMENTS)); 
+		
+	}
+	
+	//@Test
+	public void getCharacterAch() throws Exception {
+			CharacterDao dao = new CharacterDao();
+			System.out.println(dao.getCharacter("Outland", "Polon", Region.EN_GB,Field.ACHIEVEMENTS)); 
 	}
 
 }

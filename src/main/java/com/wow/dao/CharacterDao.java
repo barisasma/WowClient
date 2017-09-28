@@ -25,17 +25,6 @@ public class CharacterDao extends Dao{
 	private String wowCharacter = "character";
 	private String classes = "data/character/classes";
 	
-	public Character getCharacter(String realm,String characterName,Region region) {
-		ParamBuilder param = new ParamBuilder();
-		param.addParam(wowCharacter,realm,characterName).addFields(checkRegion(region));
-		String jsonString = WowConnection.getJsonString(param.toString());
-		if(checkWowException(jsonString))
-			throw new CharacterNotFoundException("Character Not Found");
-		Character myCharacter = new Gson().fromJson(jsonString, Character.class);
-		myCharacter.setCharacterClass(CharacterClassObject.get(myCharacter.getClassId()));
-		return myCharacter;
-	}
-	
 	public List<CharacterClass> getCharacterClasses(Region region) {
 		ParamBuilder param = new ParamBuilder();
 		param.addParam(classes).addFields(checkRegion(region));
@@ -46,23 +35,15 @@ public class CharacterDao extends Dao{
 		return new Gson().fromJson(String.valueOf(jsonArray), reflectType);
 	}
 	
-	
-	public Character getCharacterAchi(String realm,String characterName,Region region) {
+	public Character getCharacter(String realm,String characterName,Region region,Field... field) {
 		ParamBuilder param = new ParamBuilder();
-		param.addParam(wowCharacter, realm,characterName).addFields(checkRegion(region), Field.ACHIEVEMENTS.toString());
+		param.addParam(wowCharacter, realm,characterName).addFields(checkRegion(region), field);
 		String jsonString = WowConnection.getJsonString(param.toString());
-		JSONObject jsonObj = new JSONObject(jsonString);
-		JSONArray achiCompleted= jsonObj.getJSONObject(Field.ACHIEVEMENTS.toString()).getJSONArray("achievementsCompleted");
-		int[] achievements = new int[achiCompleted.length()];
-		for (int i = 0; i < achiCompleted.length(); ++i) {
-		    achievements[i] = achiCompleted.optInt(i);
-		}
 		if(checkWowException(jsonString))
 			throw new CharacterNotFoundException("Character Not Found");
-		Character myCharacter = new Gson().fromJson(jsonString, Character.class);
-		myCharacter.setCharacterClass(CharacterClassObject.get(myCharacter.getClassId()));
-		myCharacter.setAchievementsCompleted(achievements);
-		return myCharacter;
+		Character character = new Gson().fromJson(jsonString, Character.class);
+		character.setCharacterClass(CharacterClassObject.get(character.getClassId()));
+		return character; 
 	}
 	
 }

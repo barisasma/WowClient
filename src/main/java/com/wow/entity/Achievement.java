@@ -3,7 +3,7 @@ package com.wow.entity;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class CharacterAchievement {
+public class Achievement {
 	private int id;
 	private String title;
 	private double points;

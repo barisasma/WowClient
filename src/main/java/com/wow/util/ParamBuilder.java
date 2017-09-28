@@ -1,5 +1,6 @@
 package com.wow.util;
 
+import com.wow.domain.Field;
 import com.wow.domain.Region;
 
 public class ParamBuilder {
@@ -15,13 +16,14 @@ public class ParamBuilder {
 	}
 	
 	
-	public ParamBuilder addFields(Region region,String... args) {
+	public ParamBuilder addFields(Region region,Field... args) {
 		param.append("?");
 		param.append("fields=");
 		for (int i = 0; i < args.length; i++) {
 			param.append(args[i]);
-			param.append("&");
+			param.append("+");
 		}
+		param.append("&");
 		param.append("locale=").append(region.toString());
 		return this;
 	}

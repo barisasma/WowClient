@@ -1,5 +1,7 @@
 package com.wow.entity;
 
+import java.util.List;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
@@ -36,7 +38,8 @@ public class Character {
 	private String calcClass; 
 	private int faction;
 	private long totalHonorableKills;
-	private int[] achievementsCompleted;
+	private CharacterAchievements achievements;
+	private List<CharacterFeed> feed;
 	public long getLastModified() {
 		return lastModified;
 	}
@@ -116,11 +119,19 @@ public class Character {
 		this.totalHonorableKills = totalHonorableKills;
 	}
 
-	public int[] getAchievementsCompleted() {
-		return achievementsCompleted;
+	public CharacterAchievements getAchievements() {
+		return achievements;
 	}
-	public void setAchievementsCompleted(int[] achievementsCompleted) {
-		this.achievementsCompleted = achievementsCompleted;
+	
+	public void setAchievements(CharacterAchievements achievements) {
+		this.achievements = achievements;
+	}
+	
+	public List<CharacterFeed> getFeed() {
+		return feed;
+	}
+	public void setFeed(List<CharacterFeed> feed) {
+		this.feed = feed;
 	}
 	
 	@Override

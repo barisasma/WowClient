@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.wow.domain.Field;
 import com.wow.domain.Region;
-import com.wow.entity.CharacterAchievement;
+import com.wow.entity.Achievement;
 import com.wow.util.ParamBuilder;
 import com.wow.util.WowConnection;
 
@@ -23,14 +23,14 @@ public class DataSourcesDao extends Dao{
 	}
 
 
-	public List<CharacterAchievement> getCharacterAchievements(Region region){
+	public List<Achievement> getCharacterAchievements(Region region){
 		ParamBuilder param = new ParamBuilder();
 		param.addParam(characterAchi).addFields(checkRegion(region));
 		String jsonString = WowConnection.getJsonString(param.toString());
 		JSONObject jsonObject = new JSONObject(jsonString);
 		JSONArray jsonArray = jsonObject.getJSONArray(Field.ACHIEVEMENTS.toString());
-		List<CharacterAchievement> achiList = new ArrayList<>();
-		Type reflectType = new TypeToken<List<CharacterAchievement>>(){}.getType();
+		List<Achievement> achiList = new ArrayList<>();
+		Type reflectType = new TypeToken<List<Achievement>>(){}.getType();
 		Gson gson= new Gson();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject object = jsonArray.getJSONObject(i);
@@ -47,5 +47,9 @@ public class DataSourcesDao extends Dao{
 		}
 		return achiList;
 	}
+	
+	
+	
+	
 
 }
