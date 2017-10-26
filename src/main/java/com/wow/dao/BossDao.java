@@ -2,6 +2,7 @@ package com.wow.dao;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.annotation.Nonnull;
 
@@ -19,7 +20,7 @@ import com.wow.util.Util;
 
 public class BossDao extends Dao{
 
-	
+	 
 	public BossDao() {
 		this.region = Region.EN_US;
 	}
@@ -51,7 +52,7 @@ public class BossDao extends Dao{
 			Util.checkNotNull(id);
 			return getBoss(id, this.region);
 		} catch (BossNotFoundException e) {
-			e.printStackTrace();
+			exceptionLogger.log(Level.SEVERE, e);
 		}
 		return null;
 	}

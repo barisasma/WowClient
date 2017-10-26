@@ -4,20 +4,25 @@
 package com.wow.test;
 
 
+import java.util.logging.Level;
 import org.junit.Test;
-
 import com.wow.dao.BossDao;
 import com.wow.dao.CharacterDao;
 import com.wow.dao.DataSourcesDao;
 import com.wow.domain.Field;
+import com.wow.domain.LogType;
 import com.wow.domain.Region;
 import com.wow.util.Util;
+import com.wow.util.WowLog;
 
 /**
  * @author baris.asma
  *
  */
 public class BasicTest {
+	
+	//private static WowLog daoLog =  new WowLog(BasicTest.class.getName(),false,LogType.DAO);
+	//private static WowLog exceptionLog =  new WowLog(BasicTest.class.getName(),false,LogType.EXCEPTION);
 	
 	//@Test
 	public void getBosses() throws Exception {
@@ -34,7 +39,7 @@ public class BasicTest {
 		System.out.println(dao.getBoss("53879"));//write
 	}
 	
-	@Test
+	//@Test
 	public void getCharacter() throws Exception{
 		CharacterDao dao = new CharacterDao();
 		System.out.println(dao.getCharacter("Outland", "Polon", Region.EN_GB));
@@ -50,14 +55,20 @@ public class BasicTest {
 	//@Test
 	public void getCharacterAchievements() throws Exception{
 		DataSourcesDao dao = new DataSourcesDao();
-		dao.getCharacterAchievements(Region.EN_GB).stream().forEach(System.out::println);
+		//dao.getCharacterAchievements(Region.EN_GB).stream().forEach(achi -> daoLog.log(Level.INFO, achi.toString()));
 	}
 	
 	//@Test
 	public void getCharacterFeed() throws Exception {
 		CharacterDao dao = new CharacterDao();
-		System.out.println(dao.getCharacter("Outland", "Polon", Region.EN_GB,Field.FEED,Field.ACHIEVEMENTS)); 
+		dao.getCharacter("Outland", "Polon", Region.EN_GB,Field.FEED); 
 		
+	}
+	
+	@Test
+	public void getCharacterProgression() {
+		CharacterDao dao = new CharacterDao();
+		dao.getCharacter("Outland", "Polon", Region.EN_GB,Field.PROGRESSION);		
 	}
 	
 	//@Test

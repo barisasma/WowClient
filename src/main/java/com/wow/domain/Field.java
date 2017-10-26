@@ -2,7 +2,8 @@ package com.wow.domain;
 
 public enum Field {
 	ACHIEVEMENTS("achievements"),
-	FEED("feed");
+	FEED("feed"),
+	PROGRESSION("progression");
 
 	private final String text;
 

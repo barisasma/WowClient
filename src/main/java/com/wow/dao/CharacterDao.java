@@ -2,6 +2,8 @@ package com.wow.dao;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.logging.Level;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.google.gson.Gson;
@@ -16,7 +18,6 @@ import com.wow.util.ParamBuilder;
 import com.wow.util.WowConnection;
 
 public class CharacterDao extends Dao{
-	
 	
 	public CharacterDao() {
 		this.region = Region.EN_US;
@@ -43,6 +44,7 @@ public class CharacterDao extends Dao{
 			throw new CharacterNotFoundException("Character Not Found");
 		Character character = new Gson().fromJson(jsonString, Character.class);
 		character.setCharacterClass(CharacterClassObject.get(character.getClassId()));
+		jsonLogger.log(Level.INFO, character.toString());
 		return character; 
 	}
 	

@@ -8,22 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Character {
 
-	/*{
-	    "lastModified": 1506289253000,
-	    "name": "Polon",
-	    "realm": "Outland",
-	    "battlegroup": "Misery",
-	    "class": 2,
-	    "race": 3,
-	    "gender": 0,
-	    "level": 110,
-	    "achievementPoints": 5520,
-	    "thumbnail": "outland/210/89571794-avatar.jpg",
-	    "calcClass": "b",
-	    "faction": 0,
-	    "totalHonorableKills": 1130
-	}*/
-
 	private long lastModified;
 	private String name;
 	private String realm;
@@ -40,6 +24,7 @@ public class Character {
 	private long totalHonorableKills;
 	private CharacterAchievements achievements;
 	private List<CharacterFeed> feed;
+	private CharacterProgression progression;
 	public long getLastModified() {
 		return lastModified;
 	}
@@ -133,10 +118,16 @@ public class Character {
 	public void setFeed(List<CharacterFeed> feed) {
 		this.feed = feed;
 	}
-	
+	public CharacterProgression getProgression() {
+		return progression;
+	}
+	public void setProgression(CharacterProgression progression) {
+		this.progression = progression;
+	}
 	@Override
 	public String toString() {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().setPrettyPrinting()
+			    .disableHtmlEscaping().create();
 		return gson.toJson(this);
 	}
 

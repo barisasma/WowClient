@@ -3,6 +3,8 @@ package com.wow.dao;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,17 +41,15 @@ public class DataSourcesDao extends Dao{
 			try {
 				JSONArray categories = object.getJSONArray("categories");
 				for (int j = 0; j < categories.length(); j++) {
-					achiList.addAll(gson.fromJson(String.valueOf(categories.getJSONObject(j).getJSONArray(Field.ACHIEVEMENTS.toString())), reflectType)); 
+					achiList.addAll(gson.fromJson(String.valueOf(categories.getJSONObject(j)
+							.getJSONArray(Field.ACHIEVEMENTS.toString())), 
+							reflectType)); 
 				}
 			} catch (JSONException e) {
-				e.printStackTrace();
+				exceptionLogger.log(Level.SEVERE, e);
 			}
 		}
 		return achiList;
 	}
-	
-	
-	
-	
 
 }

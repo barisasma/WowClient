@@ -19,6 +19,15 @@ public class Boss {
 	private long level;
 	private long heroicLevel;
 	private long journalId;
+	private int lfrKills;
+    private long lfrTimestamp;
+    private int normalKills;
+    private long normalTimestamp;
+    private int heroicKills;
+    private long heroicTimestamp;
+    private int mythicKills;
+    private long mythicTimestamp;
+
 	private List<Npc> npcs;
 	public int getId() {
 		return id;
@@ -99,9 +108,58 @@ public class Boss {
 		this.npcs = npcs;
 	}
 	
+	public int getLfrKills() {
+		return lfrKills;
+	}
+	public void setLfrKills(int lfrKills) {
+		this.lfrKills = lfrKills;
+	}
+	public long getLfrTimestamp() {
+		return lfrTimestamp;
+	}
+	public void setLfrTimestamp(long lfrTimestamp) {
+		this.lfrTimestamp = lfrTimestamp;
+	}
+	public int getNormalKills() {
+		return normalKills;
+	}
+	public void setNormalKills(int normalKills) {
+		this.normalKills = normalKills;
+	}
+	public long getNormalTimestamp() {
+		return normalTimestamp;
+	}
+	public void setNormalTimestamp(long normalTimestamp) {
+		this.normalTimestamp = normalTimestamp;
+	}
+	public int getHeroicKills() {
+		return heroicKills;
+	}
+	public void setHeroicKills(int heroicKills) {
+		this.heroicKills = heroicKills;
+	}
+	public long getHeroicTimestamp() {
+		return heroicTimestamp;
+	}
+	public void setHeroicTimestamp(long heroicTimestamp) {
+		this.heroicTimestamp = heroicTimestamp;
+	}
+	public int getMythicKills() {
+		return mythicKills;
+	}
+	public void setMythicKills(int mythicKills) {
+		this.mythicKills = mythicKills;
+	}
+	public long getMythicTimestamp() {
+		return mythicTimestamp;
+	}
+	public void setMythicTimestamp(long mythicTimestamp) {
+		this.mythicTimestamp = mythicTimestamp;
+	}
 	@Override
 	public String toString() {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().setPrettyPrinting()
+			    .disableHtmlEscaping().create();
 		return gson.toJson(this);
 	}
 	

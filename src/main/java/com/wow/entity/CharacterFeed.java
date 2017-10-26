@@ -46,7 +46,4 @@ public class CharacterFeed {
 		this.name = name;
 	}
 	
-	
-	
-	
 }

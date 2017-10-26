@@ -44,7 +44,8 @@ public class CharacterClass {
 	
 	@Override
 	public String toString() {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().setPrettyPrinting()
+			    .disableHtmlEscaping().create();
 		return gson.toJson(this);
 	}
 }
